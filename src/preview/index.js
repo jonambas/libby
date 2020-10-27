@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import config from '__LIBRA_CONFIG__';
 import { Libra } from '../api';
-import { STORE, StoreProvider } from '../api/context';
+import { STORE, StoreProvider } from './context';
 
 const out = document.createElement('div');
 document.body.append(out);
@@ -14,29 +14,15 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-//
-
-const api = new Libra();
+// Api
+export const api = new Libra();
 export const add = api.add.bind(api);
+export const describe = api.describe.bind(api);
 
-//
-
+// Preview / iframe rendering
 function Preview() {
-  const { entries = [] } = React.useContext(STORE);
-  console.log(entries);
-  return (
-    <div>
-      {entries.length &&
-        entries.map((entry) => {
-          return (
-            <div key={entry.key}>
-              <h3>{entry.title}</h3>
-              <p>{entry.render()}</p>
-            </div>
-          );
-        })}
-    </div>
-  );
+  const { activeEntry = {} } = React.useContext(STORE);
+  return <div data-id="libra-frame">{activeEntry.render && activeEntry.render()}</div>;
 }
 
 function renderPreview() {
