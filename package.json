@@ -2,7 +2,7 @@
   "name": "@libra/react",
   "version": "0.0.1",
   "description": "",
-  "main": "src/preview/index.js",
+  "main": "src/api/index.js",
   "bin": {
     "libra": "bin/cli.js"
   },

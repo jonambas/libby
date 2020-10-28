@@ -30,14 +30,13 @@ const NavLi = styled.li`
 
 function App() {
   const [data, setData] = React.useState();
+  const search = window.location.search;
 
-  bus.on('set_entries', (d) => {
-    setData(d);
-  });
+  bus.on('set_entries', setData);
 
   React.useEffect(() => {
-    bus.emit('load_entry', window.location.search);
-  }, [window.location.search]);
+    bus.emit('load_entry', search);
+  }, [search]);
 
   const navItems = React.useMemo(() => {
     if (data) {
@@ -62,7 +61,7 @@ function App() {
         <Box as="nav" pt="500">
           {Object.keys(navItems).map((kind) => {
             return (
-              <div>
+              <div key={kind}>
                 <Box mb="200" fontSize="100" fontWeight="500">
                   {kind}
                 </Box>
@@ -71,6 +70,7 @@ function App() {
                     return (
                       <NavLi key={entry.key}>
                         <Link to={`?path=${entry.key}`}>{entry.name}</Link>
+                        {}
                       </NavLi>
                     );
                   })}
