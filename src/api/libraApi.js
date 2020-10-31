@@ -1,7 +1,11 @@
 import createBus from 'page-bus';
 
+function removeSpaces(str) {
+  return str.split(' ').join('-');
+}
+
 function makeKey(name, kind) {
-  return `${kind}__${name.toLowerCase().split(' ').join('-')}`;
+  return `${removeSpaces(kind)}__${removeSpaces(name)}`;
 }
 
 export const bus = createBus();
@@ -11,6 +15,7 @@ export class Libra {
   constructor() {
     this.source = [];
     this.formatted = {};
+    this.kind = 'root';
   }
 
   configure(config) {
@@ -20,7 +25,6 @@ export class Libra {
       });
     })(config.stories);
 
-    this._formatEntries();
     this._startEvents();
   }
 
@@ -34,29 +38,32 @@ export class Libra {
   }
 
   describe(kind, cb) {
-    this.kind = kind;
+    this.kind = this.kind && this.kind !== 'root' ? `${this.kind}__${kind}` : kind;
     cb();
-    this.kind = 'root';
-  }
 
-  _formatEntries() {
-    this.formatted = this.source.reduce((acc, entry) => {
-      if (!acc[entry.kind]) {
-        acc[entry.kind] = [entry];
-      } else {
-        acc[entry.kind].push(entry);
-      }
-      return acc;
-    }, {});
+    const parts = this.kind.split('__');
+
+    if (parts.length > 1) {
+      parts.pop();
+      const backKind = parts.join('__');
+      this.kind = backKind;
+    } else {
+      this.kind = 'root';
+    }
   }
 
   getEntry() {
     const activeKey = window.location.search.replace('?path=', '');
-    const kind = activeKey.split('__').shift();
+    console.log(activeKey);
+    const entry = this.source.filter(({ key }) => activeKey === key);
 
-    if (kind && this.formatted[kind]) {
-      return this.formatted[kind].find(({ key }) => key === activeKey);
+    if (entry.length) {
+      return entry[0];
     }
+    // console.log(entry);
+    // if (kind && this.formatted[kind]) {
+    //   return this.formatted[kind].find(({ key }) => key === activeKey);
+    // }
 
     return null;
   }
@@ -67,10 +74,45 @@ export class Libra {
   }
 
   _getMetadata() {
-    const toEmit = Object.keys(this.formatted).map((key) => {
-      return this.formatted[key].map(({ render, ...entry }) => entry);
-    });
-    return toEmit;
+    const withoutRender = this.source.map(({ render, ...entry }) => entry);
+
+    function expand(acc, item) {
+      const parts = item.kind.split('__');
+
+      if (parts.length === 1) {
+        const kind = parts[0];
+        return {
+          ...acc,
+          [kind]: {
+            entries: [...(acc[kind] ? acc[kind].entries : []), item]
+          }
+        };
+      }
+
+      if (parts.length > 1) {
+        const newRoot = parts.shift();
+        const newKind = parts.join('__');
+        const kinds = acc[newRoot] && acc[newRoot].kinds ? acc[newRoot].kinds : {};
+
+        return {
+          ...acc,
+          [newRoot]: {
+            ...acc[newRoot],
+            kinds: {
+              // This is so bad i know
+              ...kinds,
+              ...expand(kinds, {
+                ...item,
+                kind: newKind
+              })
+            }
+          }
+        };
+      }
+      return acc;
+    }
+
+    return withoutRender.reduce(expand, {});
   }
 
   _startEvents() {

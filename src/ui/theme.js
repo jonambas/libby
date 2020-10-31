@@ -21,5 +21,19 @@ export const theme = {
     200: '1rem',
     100: '0.875rem',
     default: '16px'
+  },
+  colors: {
+    black: '#000000',
+    test: '#00ffff',
+    white: '#ffffff',
+    gray: {
+      100: '#f5f8fa',
+      200: '#ebf0f5',
+      300: '#d9e0e6',
+      400: '#c5ced6',
+      500: '#a2adb8',
+      600: '#818e9a',
+      700: '#626f7a'
+    }
   }
 };
