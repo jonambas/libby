@@ -8,7 +8,7 @@ export const theme = {
     400: '1rem',
     300: '0.75rem',
     200: '0.5rem',
-    100: '0.25rem',
+    100: '0.2rem',
     0: '0rem'
   },
   fontSizes: {

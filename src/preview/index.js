@@ -7,10 +7,10 @@ document.body.append(out);
 
 function Preview() {
   const entry = api.getEntry();
-  console.log(entry);
   if (!entry) {
     return null;
   }
+
   return <div data-id="libra-preview">{entry.render()}</div>;
 }
 

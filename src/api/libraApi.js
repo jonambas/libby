@@ -54,23 +54,13 @@ export class Libra {
 
   getEntry() {
     const activeKey = window.location.search.replace('?path=', '');
-    console.log(activeKey);
     const entry = this.source.filter(({ key }) => activeKey === key);
 
     if (entry.length) {
       return entry[0];
     }
-    // console.log(entry);
-    // if (kind && this.formatted[kind]) {
-    //   return this.formatted[kind].find(({ key }) => key === activeKey);
-    // }
 
     return null;
-  }
-
-  _getFirstEntry() {
-    const firstKind = this.formatted[Object.keys(this.formatted)[0]];
-    return firstKind[0];
   }
 
   _getMetadata() {
