@@ -3,8 +3,13 @@ import { Link } from '@reach/router';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import Box from '@sweatpants/box';
+import SearchContext from '../context/SearchContext';
 import Button from './Button';
 import Chevron from './Chevron';
+
+function getSearchableString(str) {
+  return str.replace('-', ' ').replace('__', ' ').toLowerCase();
+}
 
 const NavLi = styled.li`
   list-style-type: none;
@@ -33,8 +38,15 @@ const NavLi = styled.li`
 
 function NavEntry(props) {
   const { entry } = props;
+  const inputSearchValue = React.useContext(SearchContext);
+
   const search = window.location.search;
   const selectedKey = search.replace('?path=', '');
+  const stringToSearch = getSearchableString(entry.key);
+
+  if (inputSearchValue.length && !stringToSearch.includes(inputSearchValue)) {
+    return null;
+  }
 
   return (
     <NavLi selected={selectedKey === entry.key}>
@@ -46,13 +58,81 @@ function NavEntry(props) {
 function NavFolder(props) {
   const { kind, item, pl } = props;
   const [show, setShow] = React.useState(false);
+  const inputSearchValue = React.useContext(SearchContext);
+
+  const containsSearchItem = React.useMemo(() => {
+    let contains = false;
+
+    // Checks if anything is being searched
+    if (!inputSearchValue.length) {
+      return false;
+    }
+
+    // Checks if this folder itself matches input search
+    const rootKind = getSearchableString(kind);
+    if (rootKind.includes(inputSearchValue)) {
+      return true;
+    }
+
+    function searchEntries(entries) {
+      return entries.reduce((acc, entry) => {
+        const stringToSearch = getSearchableString(entry.key);
+        if (acc || stringToSearch.includes(inputSearchValue)) {
+          return true;
+        }
+        return false;
+      }, false);
+    }
+
+    function searchKinds(kinds) {
+      return Object.keys(kinds).reduce((acc, folderKind) => {
+        const hasKinds = kinds[folderKind].kinds;
+        const hasEntries =
+          kinds[folderKind] && kinds[folderKind].entries && kinds[folderKind].entries.length;
+
+        if (acc) {
+          return true;
+        }
+
+        if (getSearchableString(folderKind).includes(inputSearchValue)) {
+          return true;
+        }
+
+        if (hasKinds) {
+          return searchKinds(kinds[folderKind].kinds);
+        }
+
+        if (hasEntries) {
+          return searchEntries(kinds[folderKind].entries);
+        }
+
+        return acc;
+      }, false);
+    }
+
+    // Checks child entries of this folder
+    if (item.entries) {
+      contains = searchEntries(item.entries);
+    }
+
+    // Recursively checks kinds of this folder, and all kinds/entries underneath
+    if (item.kinds && contains === false) {
+      contains = searchKinds(item.kinds);
+    }
+
+    return contains;
+  }, [item, inputSearchValue]);
+
+  if (inputSearchValue.length && !containsSearchItem) {
+    return null;
+  }
 
   return (
     <Box pl={pl || '400'}>
       <Button onClick={() => setShow(!show)}>
-        <Chevron open={show} /> {kind}
+        <Chevron open={show || containsSearchItem} /> {kind}
       </Button>
-      {show && <NavKind item={item} />}
+      {show || containsSearchItem ? <NavKind item={item} /> : null}
     </Box>
   );
 }

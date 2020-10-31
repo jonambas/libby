@@ -1,13 +1,24 @@
 import React from 'react';
 
-function useIframeEvent(id, event, callback) {
-  React.useEffect(() => {
-    if (document.getElementById(id)) {
-      document.getElementById(id).contentWindow.document.addEventListener(event, callback);
-    }
+function getDocument(id) {
+  if (document.getElementById(id)) {
+    return document.getElementById(id).contentWindow.document;
+  }
 
+  function noop() {}
+
+  return {
+    addEventListener: noop,
+    removeEventListener: noop
+  };
+}
+function useIframeEvent(id, event, callback) {
+  const environment = getDocument(id);
+
+  React.useEffect(() => {
+    environment.addEventListener(event, callback);
     return () => {
-      document.getElementById(id).contentWindow.document.removeEventListener(event, callback);
+      environment.removeEventListener(event, callback);
     };
   }, [event, callback]);
 }
