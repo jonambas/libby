@@ -23,16 +23,23 @@ const NavLi = styled.li`
     text-decoration: none;
     border-radius: 4px;
     transition: 0.2s;
+    outline: none;
+
     ${css({
       px: 200,
       py: 100,
-      my: 100
+      my: 100,
+      fontSize: 100
     })}
     ${({ selected }) => (selected ? css({ color: 'blue', transform: 'translateX(3px)' }) : null)}
   }
 
   a:hover {
     ${css({ bg: 'gray.200' })}
+  }
+
+  a:focus-visible {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue};
   }
 `;
 

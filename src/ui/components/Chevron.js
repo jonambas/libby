@@ -4,6 +4,8 @@ import Box from '@sweatpants/box';
 
 const StyledChevron = styled.span`
   display: inline-block;
+  position: relative;
+  top: 1px;
   transform: rotate(${(props) => (props.open ? '90deg' : '0deg')});
   transition: transform 0.1s;
 `;

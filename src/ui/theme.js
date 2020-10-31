@@ -24,8 +24,8 @@ export const theme = {
   },
   colors: {
     black: '#000000',
-    test: '#00ffff',
     white: '#ffffff',
+    blue: '#1273e6',
     gray: {
       100: '#f5f8fa',
       200: '#ebf0f5',

@@ -8,16 +8,22 @@ const StyledButton = styled.button`
   cursor: pointer;
   outline: none;
   border-radius: 4px;
-  transition: background 0.2s;
+  transition: 0.2s;
+
   ${css({
     px: 0,
     pr: 200,
     py: 100,
-    my: 100
+    my: 100,
+    fontSize: 100
   })}
 
   &:hover {
     ${css({ bg: 'gray.200' })}
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue};
   }
 `;
 
