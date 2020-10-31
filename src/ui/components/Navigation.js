@@ -84,18 +84,14 @@ function NavFolder(props) {
     function searchEntries(entries) {
       return entries.reduce((acc, entry) => {
         const stringToSearch = getSearchableString(entry.key);
-        if (acc || stringToSearch.includes(inputSearchValue)) {
-          return true;
-        }
-        return false;
+        return acc || stringToSearch.includes(inputSearchValue);
       }, false);
     }
 
     function searchKinds(kinds) {
       return Object.keys(kinds).reduce((acc, folderKind) => {
         const hasKinds = kinds[folderKind].kinds;
-        const hasEntries =
-          kinds[folderKind] && kinds[folderKind].entries && kinds[folderKind].entries.length;
+        const hasEntries = kinds[folderKind].entries && kinds[folderKind].entries.length;
 
         if (acc) {
           return true;
@@ -105,12 +101,12 @@ function NavFolder(props) {
           return true;
         }
 
-        if (hasKinds) {
-          return searchKinds(kinds[folderKind].kinds);
+        if (hasEntries) {
+          acc = searchEntries(kinds[folderKind].entries);
         }
 
-        if (hasEntries) {
-          return searchEntries(kinds[folderKind].entries);
+        if (hasKinds && !acc) {
+          acc = searchKinds(kinds[folderKind].kinds);
         }
 
         return acc;

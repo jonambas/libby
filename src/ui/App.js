@@ -51,13 +51,13 @@ function App() {
   }
 
   return (
-    <Box display="grid" gridTemplateColumns={showSidebar ? 'minmax(180px, 15%) 1fr' : '1fr'}>
+    <Box display="grid" gridTemplateColumns={showSidebar ? 'minmax(200px, 15%) 1fr' : '1fr'}>
       {showSidebar ? (
-        <Box p="400">
-          <Box as="h1" fontSize="200" m="0" mb="400">
+        <Box height="100%">
+          <Box as="h1" fontSize="200" m="0" my="400" px="300">
             {config.title || 'Libra'}
           </Box>
-          <Box mb="200">
+          <Box mb="200" px="300">
             <Input
               type="text"
               value={inputValue}
@@ -67,14 +67,16 @@ function App() {
               ref={inputRef}
             />
           </Box>
-          <Box as="nav">
-            <SearchContext.Provider value={inputValue.toLowerCase()}>
-              <Navigation items={navItems} />
-            </SearchContext.Provider>
+          <Box px="300">
+            <Box as="nav">
+              <SearchContext.Provider value={inputValue.toLowerCase()}>
+                <Navigation items={navItems} />
+              </SearchContext.Provider>
+            </Box>
           </Box>
         </Box>
       ) : null}
-      <Box height="100vh" p="400">
+      <Box height="100vh" p="500">
         <Box
           id="libra-iframe"
           as="iframe"

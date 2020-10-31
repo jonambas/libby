@@ -5,7 +5,7 @@ import css from '@styled-system/css';
 const StyledInput = styled.input`
   display: block;
   margin: 0;
-  width: 80%;
+  width: 100%;
   border: none;
   border-radius: 4px;
   border: none;

@@ -9,6 +9,7 @@ const StyledButton = styled.button`
   outline: none;
   border-radius: 4px;
   transition: 0.2s;
+  white-space: nowrap;
 
   ${css({
     px: 0,
