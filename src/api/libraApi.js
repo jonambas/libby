@@ -23,7 +23,7 @@ export class Libra {
       context.keys().forEach((key) => {
         context(key);
       });
-    })(config.stories);
+    })(config.entries);
 
     this._startEvents();
   }

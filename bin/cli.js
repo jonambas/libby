@@ -44,10 +44,10 @@ async function libra(command, flags) {
     process.exit(1);
   }
 
-  const configPath = await findUp('libra.config.js');
+  const configPath = await findUp('.libra/config.js');
 
   if (!configPath) {
-    console.error('Please add a libra.config.js to the root of your project.');
+    console.error('Please add a ./libra/config.js to your project.');
     process.exit(1);
   }
 
