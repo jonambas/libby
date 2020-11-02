@@ -1,5 +1,5 @@
 module.exports = {
-  entries: require.context('./src', true, /\.libby\.js$/),
+  entries: () => require.context('./src', true, /\.libby\.js$/),
   title: 'Libby Example',
   webpackConfig: () => ({}),
   layout: './.libby/layout.js',

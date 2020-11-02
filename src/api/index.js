@@ -6,4 +6,4 @@ export const add = api.add.bind(api);
 export const describe = api.describe.bind(api);
 export const bus = pagebus;
 
-api.configure(config.entries);
+api.configure(config.entries());
