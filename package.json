@@ -1,5 +1,5 @@
 {
-  "name": "@libra/react",
+  "name": "libra-react",
   "version": "0.0.1",
   "description": "",
   "main": "src/api/index.js",

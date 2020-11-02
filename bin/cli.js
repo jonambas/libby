@@ -10,7 +10,7 @@ const cli = meow(
   `
   Usage
     $ libra <command> [options...]
-  
+
   Commands
     start          Starts the libra UI
     build          Builds the libra UI
@@ -31,14 +31,6 @@ const cli = meow(
       version: {
         type: 'boolean',
         alias: 'v'
-      },
-      output: {
-        type: 'string',
-        alias: 'o'
-      },
-      port: {
-        type: 'number',
-        alias: 'p'
       }
     }
   }
@@ -54,17 +46,18 @@ async function libra(command, flags) {
     process.exit(1);
   }
 
-  const configPath = await findUp('.libra/config.js');
+  const configPath = await findUp('libra.config.js');
 
   if (!configPath) {
     console.error('Please add ./libra/config.js to your project.');
     process.exit(1);
   }
 
+  const config = await import(configPath);
+
   const libra = lib({
     cwd: path.dirname(configPath),
-    ...(flags.output ? { outputPath: flags.output } : {}),
-    ...(flags.port ? { port: flags.port } : {})
+    ...config.default
   });
 
   if (libra.hasOwnProperty(command)) {

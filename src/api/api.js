@@ -18,13 +18,16 @@ export class Libra {
     this.kind = 'root';
   }
 
-  configure(config) {
-    ((context) => {
-      context.keys().forEach((key) => {
+  configure(include) {
+    function load(context) {
+      const keys = context.keys();
+
+      keys.forEach((key) => {
         context(key);
       });
-    })(config.entries);
+    }
 
+    load(include);
     this._startEvents();
   }
 
