@@ -1,4 +1,4 @@
-import createBus from 'page-bus';
+import { bus } from './';
 
 function removeSpaces(str) {
   return str.split(' ').join('-');
@@ -7,9 +7,6 @@ function removeSpaces(str) {
 function makeKey(name, kind) {
   return `${removeSpaces(kind)}__${removeSpaces(name)}`;
 }
-
-export const bus = createBus();
-bus.setMaxListeners(100);
 
 export class Libby {
   constructor() {
@@ -44,9 +41,9 @@ export class Libby {
     });
   }
 
-  describe(kind, cb) {
+  describe(kind, callback) {
     this.kind = this.kind && this.kind !== 'root' ? `${this.kind}__${kind}` : kind;
-    cb();
+    callback();
 
     const parts = this.kind.split('__');
 
