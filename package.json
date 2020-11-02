@@ -23,6 +23,8 @@
     "@sweatpants/button": "0.0.4",
     "@sweatpants/theme": "0.0.4",
     "babel-loader": "^8.1.0",
+    "css-loader": "^5.0.0",
+    "file-loader": "^6.2.0",
     "find-up": "^5.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
@@ -31,6 +33,7 @@
     "open": "^7.3.0",
     "page-bus": "^3.0.1",
     "qs": "^6.9.4",
+    "style-loader": "^2.0.0",
     "styled-components": "^5.2.0",
     "webpack": "^4.44.2",
     "webpack-dev-server": "^3.11.0"

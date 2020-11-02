@@ -29,6 +29,10 @@ export class Libra {
   }
 
   add(name, render) {
+    if (!name || !render) {
+      return;
+    }
+
     this.source.push({
       kind: this.kind,
       key: makeKey(name, this.kind),
