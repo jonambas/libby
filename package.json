@@ -32,7 +32,7 @@
     "meow": "^7.1.1",
     "open": "^7.3.0",
     "page-bus": "^3.0.1",
-    "qs": "^6.9.4",
+    "query-string": "^6.13.6",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.0",
     "webpack": "^4.44.2",

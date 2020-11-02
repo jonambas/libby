@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import qs from 'query-string';
 import { api } from '../api';
 
 const out = document.createElement('div');
 document.body.append(out);
 
 function Preview() {
-  const entry = api.getEntry();
+  const { path } = qs.parse(window.location.search);
+  const entry = api.getEntry(path);
 
-  if (!entry) {
-    return null;
-  }
-
+  // Gets user-provided layout wrapper
   const Wrapper = React.useMemo(() => {
     let Layout;
 
@@ -19,8 +18,12 @@ function Preview() {
       Layout = require('__LIBRA_LAYOUT__');
     } catch (e) {}
 
-    return Layout.default ? Layout.default : 'div';
+    return Layout.default || 'div';
   }, []);
+
+  if (!entry) {
+    return null;
+  }
 
   return (
     <div data-id="libra-preview">

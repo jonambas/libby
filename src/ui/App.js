@@ -17,15 +17,11 @@ function App() {
   const [inputValue, setInputValue] = React.useState('');
   const inputRef = React.useRef();
 
-  const search = window.location.search;
-
   React.useEffect(() => {
     bus.on('set_entries', setNavItems);
   }, []);
 
-  React.useEffect(() => {
-    bus.emit('load_entry', search);
-  }, [search]);
+  bus.emit('load_entry', window.location.search);
 
   function handleKeyEvents(e) {
     if (e.keyCode === 83) {
@@ -35,8 +31,6 @@ function App() {
     if (e.keyCode === 70) {
       inputRef.current.focus();
     }
-
-    console.log(e.keyCode);
   }
 
   useWindowEvent('keydown', handleKeyEvents);

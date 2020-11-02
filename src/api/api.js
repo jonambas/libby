@@ -56,9 +56,8 @@ export class Libra {
     }
   }
 
-  getEntry() {
-    const activeKey = window.location.search.replace('?path=', '');
-    const entry = this.source.filter(({ key }) => activeKey === key);
+  getEntry(requestedKey) {
+    const entry = this.source.filter(({ key }) => requestedKey === key);
 
     if (entry.length) {
       return entry[0];
