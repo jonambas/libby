@@ -1,4 +1,4 @@
-import config from '__LIBRA_CONFIG__';
+import config from '__LIBBY_CONFIG__';
 import React from 'react';
 import { Router } from '@reach/router';
 import Theme from '@sweatpants/theme';
@@ -34,7 +34,7 @@ function App() {
   }
 
   useWindowEvent('keydown', handleKeyEvents);
-  useIframeEvent('libra-iframe', 'keydown', handleKeyEvents);
+  useIframeEvent('libby-iframe', 'keydown', handleKeyEvents);
 
   function handleSearchChange(e) {
     setInputValue(e.currentTarget.value);
@@ -49,7 +49,7 @@ function App() {
       {showSidebar ? (
         <Box height="100%">
           <Box as="h1" fontSize="200" m="0" my="400" px="300">
-            {config.title || 'Libra'}
+            {config.title || 'Libby'}
           </Box>
           <Box mb="200" px="300">
             <Input
@@ -72,7 +72,7 @@ function App() {
       ) : null}
       <Box height="100vh" p="500">
         <Box
-          id="libra-iframe"
+          id="libby-iframe"
           as="iframe"
           src={`${window.location.origin}/iframe.html`}
           width="100%"

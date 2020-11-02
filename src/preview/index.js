@@ -15,7 +15,7 @@ function Preview() {
     let Layout;
 
     try {
-      Layout = require('__LIBRA_LAYOUT__');
+      Layout = require('__LIBBY_LAYOUT__');
     } catch (e) {}
 
     return Layout.default || 'div';
@@ -26,7 +26,7 @@ function Preview() {
   }
 
   return (
-    <div data-id="libra-preview">
+    <div data-id="libby-preview">
       <Wrapper>{entry.render()}</Wrapper>
     </div>
   );

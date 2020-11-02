@@ -24,7 +24,7 @@ const StyledInput = styled.input`
 `;
 
 const Input = React.forwardRef(function Input(props, ref) {
-  return <StyledInput data-id="libra-input" {...props} ref={ref} />;
+  return <StyledInput data-id="libby-input" {...props} ref={ref} />;
 });
 
 export default Input;

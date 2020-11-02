@@ -1,5 +1,5 @@
 import React from 'react';
-import { describe, add } from 'libra-react';
+import { describe, add } from 'libby-react';
 import Button from './Button';
 
 describe('CSS', () => {

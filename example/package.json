@@ -1,11 +1,11 @@
 {
-  "name": "libra-example",
+  "name": "libby-example",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "libra start",
-    "build": "libra build"
+    "start": "libby start",
+    "build": "libby build"
   },
   "author": "",
   "license": "MIT",

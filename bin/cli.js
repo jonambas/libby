@@ -9,11 +9,11 @@ import lib from '../lib/index.js';
 const cli = meow(
   `
   Usage
-    $ libra <command> [options...]
+    $ libby <command> [options...]
 
   Commands
-    start          Starts the libra UI
-    build          Builds the libra UI
+    start          Starts the libby UI
+    build          Builds the libby UI
     help           Displays this usage guide
 
 	Options
@@ -36,7 +36,7 @@ const cli = meow(
   }
 );
 
-async function libra(command, flags) {
+async function libby(command, flags) {
   if (flags.version) {
     cli.showVersion(1);
   }
@@ -46,22 +46,22 @@ async function libra(command, flags) {
     process.exit(1);
   }
 
-  const configPath = await findUp('libra.config.js');
+  const configPath = await findUp('libby.config.js');
 
   if (!configPath) {
-    console.error('Please add ./libra/config.js to your project.');
+    console.error('Please add ./libby/config.js to your project.');
     process.exit(1);
   }
 
   const config = await import(configPath);
 
-  const libra = lib({
+  const libby = lib({
     cwd: path.dirname(configPath),
     ...config.default
   });
 
-  if (libra.hasOwnProperty(command)) {
-    libra[command]((err) => {
+  if (libby.hasOwnProperty(command)) {
+    libby[command]((err) => {
       if (err) {
         console.error(err);
         process.exit(1);
@@ -73,4 +73,4 @@ async function libra(command, flags) {
   }
 }
 
-libra(cli.input[0], cli.flags);
+libby(cli.input[0], cli.flags);

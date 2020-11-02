@@ -11,7 +11,7 @@ function makeKey(name, kind) {
 export const bus = createBus();
 bus.setMaxListeners(100);
 
-export class Libra {
+export class Libby {
   constructor() {
     this.source = [];
     this.formatted = {};

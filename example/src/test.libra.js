@@ -1,5 +1,5 @@
 import React from 'react';
-import { describe, add } from 'libra-react';
+import { describe, add } from 'libby-react';
 
 describe('Category 1', () => {
   add('name 1', () => <div>This is a React component</div>);
