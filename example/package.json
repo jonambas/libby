@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "libra start",
-    "build": "libra build"
+    "start": "libra start -p 9003",
+    "build": "libra build -o libra-build"
   },
   "author": "",
   "license": "MIT",

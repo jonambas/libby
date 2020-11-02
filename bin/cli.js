@@ -19,6 +19,8 @@ const cli = meow(
 	Options
     --help, -h     Displays this usage guide
     --version, -v  Displays version info
+    --output, -o   Sets path to build directory
+    --port, -p     Sets port to open browser
 `,
   {
     flags: {
@@ -29,6 +31,14 @@ const cli = meow(
       version: {
         type: 'boolean',
         alias: 'v'
+      },
+      output: {
+        type: 'string',
+        alias: 'o'
+      },
+      port: {
+        type: 'number',
+        alias: 'p'
       }
     }
   }
@@ -47,15 +57,14 @@ async function libra(command, flags) {
   const configPath = await findUp('.libra/config.js');
 
   if (!configPath) {
-    console.error('Please add a ./libra/config.js to your project.');
+    console.error('Please add ./libra/config.js to your project.');
     process.exit(1);
   }
 
-  const config = configPath;
-
   const libra = lib({
     cwd: path.dirname(configPath),
-    ...config
+    ...(flags.output ? { outputPath: flags.output } : {}),
+    ...(flags.port ? { port: flags.port } : {})
   });
 
   if (libra.hasOwnProperty(command)) {

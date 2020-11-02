@@ -23,6 +23,7 @@
     "@sweatpants/button": "0.0.4",
     "@sweatpants/theme": "0.0.4",
     "babel-loader": "^8.1.0",
+    "chalk": "^4.1.0",
     "css-loader": "^5.0.0",
     "file-loader": "^6.2.0",
     "find-up": "^5.0.0",
@@ -36,7 +37,8 @@
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.0",
     "webpack": "^4.44.2",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpackbar": "^4.0.0"
   },
   "peerDependencies": {
     "react": "^16.8",
