@@ -1,4 +1,4 @@
-import { Libra, bus as pagebus } from './libraApi';
+import { Libra, bus as pagebus } from './api';
 import config from '__LIBRA_CONFIG__';
 
 export const api = new Libra();
