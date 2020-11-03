@@ -20,29 +20,31 @@ function App() {
   const environment = useWindow();
   const search = environment?.location?.search;
 
+  console.log({ search, navItems });
+
   bus.on('set_entries', setNavItems);
   bus.emit('load_entry', search);
 
-  function handleKeyEvents(e) {
-    if (e.keyCode === 83) {
-      setShowSidebar(!showSidebar);
-    }
+  // function handleKeyEvents(e) {
+  //   if (e.keyCode === 83) {
+  //     setShowSidebar(!showSidebar);
+  //   }
 
-    if (e.keyCode === 70) {
-      inputRef.current.focus();
-    }
-  }
+  //   if (e.keyCode === 70) {
+  //     inputRef.current.focus();
+  //   }
+  // }
 
-  useWindowEvent('keydown', handleKeyEvents);
-  useIframeEvent('libby-iframe', 'keydown', handleKeyEvents);
+  // useWindowEvent('keydown', handleKeyEvents);
+  // useIframeEvent('libby-iframe', 'keydown', handleKeyEvents);
 
-  function handleSearchChange(e) {
-    setInputValue(e.currentTarget.value);
-  }
+  // function handleSearchChange(e) {
+  //   setInputValue(e.currentTarget.value);
+  // }
 
-  function handleSearchKeydown(e) {
-    e.stopPropagation();
-  }
+  // function handleSearchKeydown(e) {
+  //   e.stopPropagation();
+  // }
 
   return (
     <Box display="grid" gridTemplateColumns={showSidebar ? 'minmax(200px, 15%) 1fr' : '1fr'}>
@@ -55,8 +57,8 @@ function App() {
             <Input
               type="text"
               value={inputValue}
-              onChange={handleSearchChange}
-              onKeyDown={handleSearchKeydown}
+              // onChange={handleSearchChange}
+              // onKeyDown={handleSearchKeydown}
               placeholder="Search"
               ref={inputRef}
             />
