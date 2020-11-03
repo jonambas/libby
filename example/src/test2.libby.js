@@ -1,4 +1,6 @@
 import React from 'react';
-import { add } from 'libby-react';
+import { add, describe } from 'libby-react';
 
-add('Lorem Ipsum', () => <div>This is a React component</div>);
+describe('Error', () => {
+  add('renders correctly', () => <div>This is {oops} a React component</div>);
+});
