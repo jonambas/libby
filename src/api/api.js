@@ -58,7 +58,7 @@ export class Libby {
 
   getEntry(requestedKey) {
     const entry = this.source.filter(({ key }) => requestedKey === key);
-
+    console.log('[getEntry]', { entry, source: this.source, requestedKey });
     if (entry.length) {
       return entry[0];
     }
