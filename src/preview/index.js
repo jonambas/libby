@@ -6,24 +6,19 @@ import { api } from '../api';
 const out = document.createElement('div');
 document.body.append(out);
 
-function renderPreview(props = {}) {
-  const { layout = require('__LIBBY_LAYOUT__') } = props;
+function Preview({ layout: Layout = require('./layout') } = {}) {
   const { path } = qs.parse(window.location.search);
-
   const entry = api.getEntry(path);
-  const Wrapper = layout?.default || layout;
 
   if (!entry) {
     return null;
   }
 
-  ReactDOM.render(<Wrapper>{entry.render()}</Wrapper>, out);
+  return <Layout>{entry.render()}</Layout>;
+}
+
+function renderPreview() {
+  ReactDOM.render(<Preview />, out);
 }
 
 renderPreview();
-
-if (module.hot) {
-  module.hot.accept('__LIBBY_LAYOUT__', () => {
-    renderPreview({ layout: require('__LIBBY_LAYOUT__') });
-  });
-}

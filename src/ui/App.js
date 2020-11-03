@@ -20,8 +20,6 @@ function App() {
   const environment = useWindow();
   const search = environment?.location?.search;
 
-  console.log({ search, navItems });
-
   bus.on('set_entries', setNavItems);
   bus.emit('load_entry', search);
 
