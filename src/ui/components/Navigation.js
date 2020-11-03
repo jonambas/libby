@@ -3,9 +3,11 @@ import { Link } from '@reach/router';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import Box from '@sweatpants/box';
+import Stack from '@sweatpants/stack';
 import SearchContext from '../context/SearchContext';
 import Button from './Button';
 import Chevron from './Chevron';
+import Skeleton from './Skeleton';
 
 function getSearchableString(str) {
   return str.replace('-', ' ').replace('__', ' ').toLowerCase();
@@ -182,8 +184,17 @@ function NavRoot(props) {
 
   if (!Object.keys(items).length) {
     return (
-      <Box py="300" color="gray.700" fontSize="100">
-        No entries found.
+      <Box py="300">
+        <Stack space="200">
+          <Skeleton />
+          <Skeleton ml="2ch" />
+          <Skeleton />
+          <Skeleton ml="2ch" />
+          <Skeleton ml="4ch" />
+          <Skeleton ml="4ch" />
+          <Skeleton />
+          <Skeleton />
+        </Stack>
       </Box>
     );
   }

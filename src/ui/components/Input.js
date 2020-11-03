@@ -8,7 +8,6 @@ const StyledInput = styled.input`
   width: 100%;
   border: none;
   border-radius: 4px;
-  border: none;
   outline: none;
   transition: 0.2s;
 
