@@ -1,6 +1,6 @@
 {
   "name": "libby-react",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Libby is an open source tool for React component development",
   "main": "src/api/index.js",
   "bin": {
