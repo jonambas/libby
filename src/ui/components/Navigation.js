@@ -180,6 +180,14 @@ function NavRoot(props) {
   const { root, ...kinds } = items;
   const rootEntries = items.root ? items.root.entries : [];
 
+  if (!Object.keys(items).length) {
+    return (
+      <Box py="300" color="gray.700" fontSize="100">
+        No entries found.
+      </Box>
+    );
+  }
+
   return (
     <div>
       {Object.keys(kinds).map((kind) => {
