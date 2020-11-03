@@ -6,26 +6,24 @@ import { api } from '../api';
 const out = document.createElement('div');
 document.body.append(out);
 
-function Preview() {
+function renderPreview(props = {}) {
+  const { layout = require('__LIBBY_LAYOUT__') } = props;
   const { path } = qs.parse(window.location.search);
+
   const entry = api.getEntry(path);
+  const Wrapper = layout?.default || layout;
 
   if (!entry) {
     return null;
   }
 
-  const layout = require('__LIBBY_LAYOUT__');
-  const Wrapper = layout.default || layout;
-
-  return (
-    <div data-id="libby-preview">
-      <Wrapper>{entry.render()}</Wrapper>
-    </div>
-  );
-}
-
-function renderPreview() {
-  ReactDOM.render(<Preview />, out);
+  ReactDOM.render(<Wrapper>{entry.render()}</Wrapper>, out);
 }
 
 renderPreview();
+
+if (module.hot) {
+  module.hot.accept('__LIBBY_LAYOUT__', () => {
+    renderPreview({ layout: require('__LIBBY_LAYOUT__') });
+  });
+}
