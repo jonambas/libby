@@ -1,10 +1,8 @@
 #! /usr/bin/env node
-import path from 'path';
-import meow from 'meow';
-import findUp from 'find-up';
-import lib from '../lib/index.js';
-
-// CLI
+const path = require('path');
+const meow = require('meow');
+const findUp = require('find-up');
+const lib = require('../lib/index.js');
 
 const cli = meow(
   `
@@ -53,11 +51,11 @@ async function libby(command, flags) {
     process.exit(1);
   }
 
-  const config = await import(configPath);
+  const config = require(configPath);
 
   const libby = lib({
     cwd: path.dirname(configPath),
-    ...config.default
+    ...config
   });
 
   if (libby.hasOwnProperty(command)) {
