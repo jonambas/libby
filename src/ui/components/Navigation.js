@@ -182,7 +182,7 @@ function NavRoot(props) {
 
   return (
     <div>
-      {Object.keys(kinds).map((kind, i) => {
+      {Object.keys(kinds).map((kind) => {
         return <NavFolder kind={kind} item={kinds[kind]} key={kind} pl="0" />;
       })}
       {rootEntries.map((entry) => (
