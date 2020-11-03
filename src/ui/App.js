@@ -20,10 +20,7 @@ function App() {
   const environment = useWindow();
   const search = environment?.location?.search;
 
-  React.useEffect(() => {
-    bus.on('set_entries', setNavItems);
-  }, []);
-
+  bus.on('set_entries', setNavItems);
   bus.emit('load_entry', search);
 
   function handleKeyEvents(e) {
