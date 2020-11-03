@@ -1,13 +1,5 @@
 import React from 'react';
-
-function getWindow() {
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-  return {
-    matchMedia: () => ({})
-  };
-}
+import useWindow from './useWindow';
 
 /**
  * Handles global window event listeners in a reusable hook
@@ -21,7 +13,7 @@ function getWindow() {
  *  }
  */
 function useWindowEvent(event, callback) {
-  const environment = getWindow();
+  const environment = useWindow();
 
   React.useEffect(() => {
     environment.addEventListener(event, callback);

@@ -8,6 +8,7 @@ import { bus } from '../api';
 import SearchContext from './context/SearchContext';
 import useWindowEvent from './hooks/useWindowEvent';
 import useIframeEvent from './hooks/useIframeEvent';
+import useWindow from './hooks/useWindow';
 import Navigation from './components/Navigation';
 import Input from './components/Input';
 
@@ -16,12 +17,14 @@ function App() {
   const [showSidebar, setShowSidebar] = React.useState(true);
   const [inputValue, setInputValue] = React.useState('');
   const inputRef = React.useRef();
+  const environment = useWindow();
+  const search = environment?.location?.search;
 
   React.useEffect(() => {
     bus.on('set_entries', setNavItems);
   }, []);
 
-  bus.emit('load_entry', window.location.search);
+  bus.emit('load_entry', search);
 
   function handleKeyEvents(e) {
     if (e.keyCode === 83) {
@@ -74,7 +77,7 @@ function App() {
         <Box
           id="libby-iframe"
           as="iframe"
-          src={`${window.location.origin}/iframe.html`}
+          src={`${environment.location.origin}/iframe.html`}
           width="100%"
           height="100%"
           border="none"
