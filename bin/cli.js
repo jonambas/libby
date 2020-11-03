@@ -17,8 +17,6 @@ const cli = meow(
 	Options
     --help, -h     Displays this usage guide
     --version, -v  Displays version info
-    --output, -o   Sets path to build directory
-    --port, -p     Sets port to open browser
 `,
   {
     flags: {
@@ -47,7 +45,7 @@ async function libby(command, flags) {
   const configPath = await findUp('libby.config.js');
 
   if (!configPath) {
-    console.error('Please add ./libby/config.js to your project.');
+    console.error('Please add libby.config.js to the root directory your project.');
     process.exit(1);
   }
 
