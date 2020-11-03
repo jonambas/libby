@@ -12,7 +12,7 @@ Libby is a focused, no-frills React component development tool, similar to Story
 Install `libby` in your app:
 
 ```bash
-npm i proply-react
+npm i libby-react
 ```
 
 Create a `libby.config.js` file to the root directory of your project:
