@@ -43,6 +43,7 @@
     "@styled-system/css": "^5.1.5",
     "@sweatpants/box": "0.0.4",
     "@sweatpants/button": "0.0.4",
+    "@sweatpants/stack": "0.0.4",
     "@sweatpants/theme": "0.0.4",
     "babel-loader": "^8.1.0",
     "chalk": "^4.1.0",

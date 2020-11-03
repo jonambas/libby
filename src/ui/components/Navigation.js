@@ -178,11 +178,11 @@ function NavKind(props) {
 }
 
 function NavRoot(props) {
-  const { items = {} } = props;
+  const { items = {}, initialized } = props;
   const { root, ...kinds } = items;
   const rootEntries = items.root ? items.root.entries : [];
 
-  if (!Object.keys(items).length) {
+  if (!initialized) {
     return (
       <Box py="300">
         <Stack space="200">
@@ -195,6 +195,14 @@ function NavRoot(props) {
           <Skeleton />
           <Skeleton />
         </Stack>
+      </Box>
+    );
+  }
+
+  if (!Object.keys(items).length) {
+    return (
+      <Box py="300" fontSize="100" color="gray.700">
+        No entries found.
       </Box>
     );
   }

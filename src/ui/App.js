@@ -13,6 +13,7 @@ import Navigation from './components/Navigation';
 import Input from './components/Input';
 
 function App() {
+  const [initialized, setInitialized] = React.useState(false);
   const [navItems, setNavItems] = React.useState({});
   const [showSidebar, setShowSidebar] = React.useState(true);
   const [inputValue, setInputValue] = React.useState('');
@@ -20,7 +21,11 @@ function App() {
   const environment = useWindow();
   const search = environment?.location?.search;
 
-  bus.on('set_entries', setNavItems);
+  bus.on('set_entries', (d) => {
+    setInitialized(true);
+    setNavItems(d);
+  });
+
   bus.emit('load_entry', search);
 
   function handleKeyEvents(e) {
@@ -48,7 +53,7 @@ function App() {
     <Box display="grid" gridTemplateColumns={showSidebar ? 'minmax(200px, 15%) 1fr' : '1fr'}>
       {showSidebar ? (
         <Box height="100%">
-          <Box as="h1" fontSize="200" m="0" my="400" px="300">
+          <Box as="h1" fontSize="100" m="0" my="400" px="300">
             {config.title || 'Libby'}
           </Box>
           <Box mb="200" px="300">
@@ -64,13 +69,13 @@ function App() {
           <Box px="300">
             <Box as="nav">
               <SearchContext.Provider value={inputValue.toLowerCase()}>
-                <Navigation items={navItems} />
+                <Navigation items={navItems} initialized={initialized} />
               </SearchContext.Provider>
             </Box>
           </Box>
         </Box>
       ) : null}
-      <Box height="100vh" p="500">
+      <Box height="100vh" p="600">
         <Box
           id="libby-iframe"
           as="iframe"

@@ -109,11 +109,7 @@ export class Libby {
   }
 
   _startEvents() {
-    const metadata = this._getMetadata();
-
-    if (Object.keys(metadata).length) {
-      bus.emit('set_entries', metadata);
-    }
+    bus.emit('set_entries', this._getMetadata());
 
     bus.on('load_entry', (search) => {
       if (search && window.location.search !== search) {
