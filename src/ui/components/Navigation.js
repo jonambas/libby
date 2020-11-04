@@ -6,7 +6,7 @@ import Box from '@sweatpants/box';
 import Stack from '@sweatpants/stack';
 import SearchContext from '../context/SearchContext';
 import Button from './Button';
-import Chevron from './Chevron';
+import Chevron from './icons/Chevron';
 import Skeleton from './Skeleton';
 
 function getSearchableString(str) {
@@ -30,7 +30,7 @@ const NavLi = styled.li`
     ${css({
       px: 200,
       py: 100,
-      my: 100,
+      mb: 200,
       fontSize: 100
     })}
     ${({ selected }) => (selected ? css({ color: 'blue', transform: 'translateX(3px)' }) : null)}
@@ -134,9 +134,11 @@ function NavFolder(props) {
 
   return (
     <Box pl={pl || '400'}>
-      <Button onClick={() => setShow(!show)}>
-        <Chevron open={show || containsSearchItem} /> {kind}
-      </Button>
+      <Box mb="200">
+        <Button onClick={() => setShow(!show)}>
+          <Chevron open={show || containsSearchItem} /> {kind}
+        </Button>
+      </Box>
       {show || containsSearchItem ? <NavKind item={item} /> : null}
     </Box>
   );

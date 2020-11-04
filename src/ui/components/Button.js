@@ -5,6 +5,7 @@ import { buttonReset } from '../styles/buttonReset';
 
 const StyledButton = styled.button`
   ${buttonReset}
+  display: inline-block;
   cursor: pointer;
   outline: none;
   border-radius: 4px;
@@ -15,7 +16,6 @@ const StyledButton = styled.button`
     px: 0,
     pr: 200,
     py: 100,
-    my: 100,
     fontSize: 100
   })}
 

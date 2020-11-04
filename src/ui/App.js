@@ -11,6 +11,7 @@ import useIframeEvent from './hooks/useIframeEvent';
 import useWindow from './hooks/useWindow';
 import Navigation from './components/Navigation';
 import Input from './components/Input';
+import Toolbar from './components/Toolbar';
 
 function App() {
   const [initialized, setInitialized] = React.useState(false);
@@ -75,7 +76,10 @@ function App() {
           </Box>
         </Box>
       ) : null}
-      <Box height="100vh" p="600">
+      <Box position="relative" height="100vh" pt="700" pb="600" px="600">
+        <Box position="absolute" top="200" right="500">
+          <Toolbar toggleSidebar={() => setShowSidebar(!showSidebar)} />
+        </Box>
         <Box
           id="libby-iframe"
           as="iframe"
