@@ -2,6 +2,9 @@
 
 Libby is a focused, no-frills React component development tool, similar to Storybook but without the plugins or addons. Libby provides a standalone environment that can be used or deployed with your component or design system documentation.
 
+##### Demos
+- [libby.vercel.app](https://libby.vercel.app/)
+
 ---
 
 ### Getting Started
@@ -9,7 +12,7 @@ Libby is a focused, no-frills React component development tool, similar to Story
 Install `libby` in your app:
 
 ```bash
-npm i proply-react
+npm i libby-react
 ```
 
 Create a `libby.config.js` file to the root directory of your project:
