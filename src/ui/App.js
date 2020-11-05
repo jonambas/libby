@@ -3,8 +3,10 @@ import React from 'react';
 import { Router } from '@reach/router';
 import Theme from '@sweatpants/theme';
 import Box from '@sweatpants/box';
+import styled from 'styled-components';
 import { theme } from './theme';
 import { bus } from '../api';
+import BackgroundContext, { BackgroundContextProvider } from './context/BackgroundContext';
 import SearchContext from './context/SearchContext';
 import useWindowEvent from './hooks/useWindowEvent';
 import useIframeEvent from './hooks/useIframeEvent';
@@ -13,12 +15,18 @@ import Navigation from './components/Navigation';
 import Input from './components/Input';
 import Toolbar from './components/Toolbar';
 
+const StyledWrapper = styled(Box)`
+  transition: background 0.1s;
+`;
+
 function App() {
+  const { value: backgroundValue } = React.useContext(BackgroundContext);
   const [initialized, setInitialized] = React.useState(false);
   const [navItems, setNavItems] = React.useState({});
   const [showSidebar, setShowSidebar] = React.useState(true);
   const [inputValue, setInputValue] = React.useState('');
   const inputRef = React.useRef();
+
   const environment = useWindow();
   const search = environment?.location?.search;
 
@@ -80,14 +88,16 @@ function App() {
         <Box position="absolute" top="200" right="500">
           <Toolbar toggleSidebar={() => setShowSidebar(!showSidebar)} />
         </Box>
-        <Box
-          id="libby-iframe"
-          as="iframe"
-          src={`${environment.location.origin}/iframe.html`}
-          width="100%"
-          height="100%"
-          border="none"
-        />
+        <StyledWrapper bg={backgroundValue || 'white'} borderRadius="5px" height="100%">
+          <Box
+            id="libby-iframe"
+            as="iframe"
+            src={`${environment.location.origin}/iframe.html`}
+            width="100%"
+            height="100%"
+            border="none"
+          />
+        </StyledWrapper>
       </Box>
     </Box>
   );
@@ -95,11 +105,13 @@ function App() {
 
 function Wrapper() {
   return (
-    <Theme theme={theme}>
-      <Router>
-        <App path="/" />
-      </Router>
-    </Theme>
+    <BackgroundContextProvider>
+      <Theme theme={theme}>
+        <Router>
+          <App path="/" />
+        </Router>
+      </Theme>
+    </BackgroundContextProvider>
   );
 }
 export default Wrapper;

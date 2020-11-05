@@ -5,7 +5,7 @@ function Image() {
     <svg
       fill="currentColor"
       preserveAspectRatio="xMidYMid meet"
-      viewBox="0 0 24 24"
+      viewBox="1 1 22 22"
       width="14px"
       height="14px"
     >

@@ -3,8 +3,10 @@ import Box from '@sweatpants/box';
 import Inline from '@sweatpants/inline';
 import ScreenReaderOnly from '@sweatpants/screenreaderonly';
 import useWindow from '../hooks/useWindow';
+import BackgroundContext from '../context/BackgroundContext';
 import Open from './icons/Open';
 import Expand from './icons/Expand';
+import Image from './icons/Image';
 import Button from './Button';
 
 function IconWrapper(props) {
@@ -17,17 +19,18 @@ function IconWrapper(props) {
 
 function Toolbar(props) {
   const { toggleSidebar } = props;
+  const { cycle } = React.useContext(BackgroundContext);
   const environment = useWindow();
   const href = `${environment?.location?.origin}/iframe.html${environment?.location?.search}`;
 
   return (
     <Inline space="100">
-      {/* <Button>
+      <Button onClick={cycle}>
         <IconWrapper>
           <Image />
-          <ScreenReaderOnly>Change backgrond color</ScreenReaderOnly>
+          <ScreenReaderOnly>Cycle backgrond color</ScreenReaderOnly>
         </IconWrapper>
-      </Button> */}
+      </Button>
 
       <Button onClick={toggleSidebar}>
         <IconWrapper>
