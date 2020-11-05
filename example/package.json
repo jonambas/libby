@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "libby-react": "0.0.15",
+    "libby-react": "0.0.17",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }
