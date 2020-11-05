@@ -5,7 +5,7 @@ import Theme from '@sweatpants/theme';
 import Box from '@sweatpants/box';
 import styled from 'styled-components';
 import { theme } from './theme';
-import { bus } from '../api';
+import bus from '../api/pagebus';
 import BackgroundContext, { BackgroundContextProvider } from './context/BackgroundContext';
 import SearchContext from './context/SearchContext';
 import useWindowEvent from './hooks/useWindowEvent';

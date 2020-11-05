@@ -1,4 +1,4 @@
-import { bus } from './';
+import bus from './pagebus';
 
 function removeSpaces(str) {
   return str.split(' ').join('-');
