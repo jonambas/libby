@@ -22,16 +22,29 @@ Create a `libby.config.js` file to the root directory of your project:
 module.exports = {
   // Required
   entries: () => require.context('./src', true, /\.libby\.js$/),
-  outputPath: 'dist',
 
   // Optional
+  outputPath: 'dist',
   layout: 'src/components/layout.js',
   openBrowser: true,
   port: 9000,
   title: 'Page Title',
   webpackConfig: () => ({
     // Custom Webpack config goes here
-  })
+  }),
+  backgrounds: {
+    default: 'white',
+    values: [
+      {
+        name: 'white',
+        value: '#ffffff'
+      },
+      {
+        name: 'gray',
+        value: '#ebf0f5'
+      }
+    ]
+  }
 };
 ```
 
@@ -45,12 +58,12 @@ Add the following scripts to your `package.json` file:
 }
 ```
 
-And finally, run libby:
+Run libby:
 
 ```bash
 npm run libby:start
-# That's it!
 ```
+
 
 ---
 
