@@ -28,14 +28,14 @@ function App() {
   const inputRef = React.useRef();
 
   const environment = useWindow();
-  const search = environment?.location?.search;
+  const searchString = environment?.location?.search;
 
   bus.on('set_entries', (d) => {
     setInitialized(true);
     setNavItems(d);
   });
 
-  bus.emit('load_entry', search);
+  bus.emit('load_entry', searchString);
 
   function handleKeyEvents(e) {
     if (e.keyCode === 83) {
@@ -86,7 +86,10 @@ function App() {
       ) : null}
       <Box position="relative" height="100vh" pt="700" pb="600" px="600">
         <Box position="absolute" top="200" right="500">
-          <Toolbar toggleSidebar={() => setShowSidebar(!showSidebar)} />
+          <Toolbar
+            toggleSidebar={() => setShowSidebar(!showSidebar)}
+            toggleSource={() => setShowSource(!showSource)}
+          />
         </Box>
         <StyledWrapper bg={backgroundValue || 'white'} borderRadius="5px" height="100%">
           <Box

@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'query-string';
 import { Link } from '@reach/router';
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -50,7 +51,7 @@ function NavEntry(props) {
   const inputSearchValue = React.useContext(SearchContext);
 
   const search = window.location.search;
-  const selectedKey = search.replace('?path=', '');
+  const { path: selectedKey } = qs.parse(search);
   const stringToSearch = getSearchableString(entry.key);
 
   if (inputSearchValue.length && !stringToSearch.includes(inputSearchValue)) {
@@ -59,7 +60,7 @@ function NavEntry(props) {
 
   return (
     <NavLi selected={selectedKey === entry.key}>
-      <Link to={`?path=${entry.key}`}>{entry.name}</Link>
+      <Link to={`?path=${entry.key}&source=false`}>{entry.name}</Link>
     </NavLi>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import qs from 'query-string';
 import { api } from '../api';
+import Source from './source';
 
 const out = document.createElement('div');
 document.body.append(out);
@@ -14,11 +15,15 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 function Preview({ layout: Layout = require('./layout') } = {}) {
-  const { path } = qs.parse(window.location.search);
+  const { path, source } = qs.parse(window.location.search);
   const entry = api.getEntry(path);
 
   if (!entry) {
     return null;
+  }
+
+  if (source === 'true') {
+    return <Source entry={entry} />;
   }
 
   return <Layout>{entry.render()}</Layout>;
